@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			StockfishModule = null;
+			function moduleDidLoad() {
+				StockfishModule = document.getElementById('stockfish');
+				console.log('module did load')
+				StockfishModule.postMessage('uci');
+				StockfishModule.postMessage('bench');
+			}
+
+			function handleMessage(event) {
+				console.log(event.data);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<div id="listener">
+			<script type="text/javascript">
+				var listener = document.getElementById('listener');
+				listener.addEventListener('load', moduleDidLoad, true);
+				listener.addEventListener('message', handleMessage, true);
+			</script>
+			<embed id='stockfish' width=0 height=0 src='stockfish.nmf' type='application/x-pnacl' />
+		</div>
+	</body>
+</html>
